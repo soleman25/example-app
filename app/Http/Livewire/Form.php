@@ -5,20 +5,20 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\Post;
 
-class Create extends Component
+class Form extends Component
 {
     public $title;
     public $content;
     public $postId;
+    public $statusUpdate = false;
 
-     public $statusUpdate = false;
 
     protected $listeners = [
         'getPost' => 'showPost',
     ];
     public function render()
     {
-        return view('livewire.create');
+        return view('livewire.form');
     }
 
     public function showPost($post)

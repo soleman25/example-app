@@ -53,7 +53,6 @@ class Index extends Component
     public function handleSave($post)
     {
         session()->flash('message', 'Post' . $post['title'] . 'was strorage!');
-
     }
 
     public function handleUpdate($post)
