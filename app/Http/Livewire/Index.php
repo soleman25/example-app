@@ -10,7 +10,7 @@ use App\Models\Post;
 class Index extends Component
 {
     use WithPagination;
-    public $statusUpdate = false;
+
     public $paginate = 5;
     public $search;
 
@@ -37,7 +37,6 @@ class Index extends Component
 
     public function getPost($id)
     {
-        $this->statusUpdate = true;
         $post = Post::find($id);
         $this->emit('getPost', $post);
     }

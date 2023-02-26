@@ -8,11 +8,8 @@
     </div>
     @endif
 
-    @if ($statusUpdate)
-    @livewire('post-update')
-    @else
-        @livewire('create')
-    @endif
+    @livewire('create')
+
     <hr class="mt-5 p-2">
     <input wire:model="search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-45 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" aria-label="Search" placeholder="Search" required="" type="text">
     <hr class="mt-5 mb-3 p-2">
