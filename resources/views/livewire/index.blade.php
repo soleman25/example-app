@@ -3,16 +3,16 @@
     <div x-data="{show: true}" x-show.transition.duration.1000ms="show"
         x-init="() => { $wire.on('show-flash-message', () => show = true);
         setTimeout(() => { show = false; $wire.call('clearMessage'); }, 3000) }"
-        class="bg-green-500 text-white p-3 rounded mb-5">
+        class="p-3 mb-5 text-white bg-green-500 rounded">
         {{ session('message') }}
     </div>
     @endif
 
     @livewire('form')
 
-    <hr class="mt-5 p-2">
+    <hr class="p-2 mt-5">
     <input wire:model="search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-45 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" aria-label="Search" placeholder="Search" required="" type="text">
-    <hr class="mt-5 mb-3 p-2">
+    <hr class="p-2 mt-5 mb-3">
 
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -26,6 +26,9 @@
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Content
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Image
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Date
@@ -50,6 +53,9 @@
                         {{ $post->content }}
                     </td>
                     <td class="px-6 py-4">
+                        <img src="{{ asset('storage/'. $post->image) }}" alt="{{ $post->title }}" class="h-auto max-w-xl rounded-lg shadow-xl dark:shadow-gray-800">
+                    </td>
+                    <td class="px-6 py-4">
                         {{ $post->created_at}}
                     </td>
                     <td class="px-6 py-4">
@@ -68,3 +74,4 @@
         {{ $posts->links() }}
     </div>
 </div>
+
