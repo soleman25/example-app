@@ -2,11 +2,16 @@
 
 namespace App\Http\Livewire;
 
+use Livewire\WithFileUploads;
 use Livewire\Component;
 use App\Models\Post;
 
 class Form extends Component
 {
+    use WithFileUploads;
+
+    public $iteration;
+    public $image;
     public $title;
     public $content;
     public $postId;
@@ -35,6 +40,7 @@ class Form extends Component
         $this->validate([
             'title' => 'required|string|min:6',
             'content' => 'required|string|max:500',
+            'image' => 'image|max:1024', // 1MB Max
         ]);
 
         if($this->postId){
@@ -42,11 +48,18 @@ class Form extends Component
             $post->update([
                 'title' => $this->title,
                 'content' => $this->content,
+                'image' =>$this->image,
             ]);
         }else{
+
+            $imageName = now()->format('Y-m') . '.' . $this->image->extension();
+            $imageName = $this->image->store('images','public');
+            $this->image=null;
+            $this->iteration++;
             $post = Post::create([
                 'title' =>$this->title,
                 'content' =>$this->content,
+                'image' =>$imageName,
                ]);
         }
 
@@ -61,5 +74,7 @@ class Form extends Component
         $this->title   = '';
         $this->content = '';
         $this->postId = '';
+        $this->image = '';
+
     }
 }
