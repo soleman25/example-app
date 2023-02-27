@@ -14,7 +14,7 @@
         @livewireStyles
     </head>
     <body>
-        <div class="pl-4 pr-4 pt-0  bg-white border border-gray-200 rounded-lg shadow-md sm:p-6 lg:p-8 dark:bg-gray-800 dark:border-gray-700" aria-label="Subscribe to the Flowbite newsletter">
+        <div class="pt-0 pl-4 pr-4 bg-white border border-gray-200 rounded-lg shadow-md sm:p-6 lg:p-8 dark:bg-gray-800 dark:border-gray-700" aria-label="Subscribe to the Flowbite newsletter">
             <div data-style="clean" class="items-end mb-3">
                 @livewire('index')
             </div>
