@@ -12,26 +12,26 @@ class Form extends Component
 
     public $iteration;
     public $image;
+    public $isUpdate = false;
     public $title;
     public $content;
     public $postId;
-    public $statusUpdate = false;
 
 
     protected $listeners = [
         'getPost' => 'showPost',
+        'getUpdate' => 'update',
     ];
     public function render()
     {
         return view('livewire.form');
     }
-
     public function showPost($post)
     {
-        $this->statusUpdate = true;
         $this->title = $post['title'];
         $this->content = $post['content'];
         $this->postId = $post['id'];
+        $this->image = $post['image'];
 
     }
 
@@ -41,17 +41,22 @@ class Form extends Component
             'title' => 'required|string|min:6',
             'content' => 'required|string|max:500',
             'image' => 'image|max:1024', // 1MB Max
+
         ]);
+
 
         if($this->postId){
             $post = Post::find($this->postId);
+            $imageName = now()->format('Y-m') . '.' . $this->image->extension();
+            $imageName = $this->image->store('images','public');
+            $this->image=null;
+            $this->iteration++;
             $post->update([
                 'title' => $this->title,
                 'content' => $this->content,
-                'image' =>$this->image,
+                'image' =>$imageName,
             ]);
         }else{
-
             $imageName = now()->format('Y-m') . '.' . $this->image->extension();
             $imageName = $this->image->store('images','public');
             $this->image=null;
@@ -70,11 +75,15 @@ class Form extends Component
 
     public function resetInput()
     {
-        $this->statusUpdate = false;
         $this->title   = '';
         $this->content = '';
         $this->postId = '';
         $this->image = '';
 
+    }
+
+    public function isUpdate()
+    {
+        $this->isUpdate = true;
     }
 }

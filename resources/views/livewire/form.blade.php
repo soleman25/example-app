@@ -15,25 +15,24 @@
         @if ($image)
             Image Preview:
             <div class="mb-3">
-                <img src="{{ $image->temporaryUrl() }}">
+                <img src="{{ $isUpdate ? $image->temporaryUrl() : asset('storage/'. $image) }}">
             </div>
         @endif
-         <div class="relative w-full mb-3 formkit-field">
+        <div class="relative w-full mb-3 formkit-field">
             <input wire:model="image" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="image{{ $iteration }}" type="file">
             <div wire:loading wire:target="image">Uploading...</div>
             @error('image')
             <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
             @enderror
         </div>
-        @if ($statusUpdate)
-        <div>
+
+        @if ($postId)
             <button type="submit" data-element="submit" class="formkit-submit">
                 <span class="px-5 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg cursor-pointer hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Update</span>
             </button>
             <a wire:click="resetInput()" class="formkit-submit">
                 <span class="px-5 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg cursor-pointer hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">Cancel</span>
             </a>
-        </div>
         @else
             <button type="submit" data-element="submit" class="formkit-submit">
                 <span class="px-5 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg cursor-pointer hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Save</span>
